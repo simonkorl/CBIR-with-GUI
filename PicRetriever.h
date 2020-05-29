@@ -4,7 +4,7 @@
 #include "Query.h"
 class PicRetriever {
 public:
-	PicRetriever(const char* dataset_rela_dir): m_pool(dataset_rela_dir){}
+	PicRetriever(std::string& dataset_rela_dir): m_pool(dataset_rela_dir){}
 	int loadPicPool(std::string allImages) {
 		return m_pool.loadAllImageInfo(allImages);
 	}
@@ -45,6 +45,8 @@ public:
 	Query* getTestQuery() {
 		return queries[0];
 	}
+	PicPool m_pool;
+	std::vector<Query*> queries;
 private:
 	static double m_L2(const int* histP,const int* histQ, int bins);
 	static double m_HI(const int *histP,const int *histQ, int bins);
@@ -53,6 +55,5 @@ private:
 	// Jffreys & Matusita distance
 	static double m_JM(const int* histP, const int* histQ, int bins);
 	bool isCorrect(std::string p, std::string q);
-	PicPool m_pool;
-	std::vector<Query*> queries;
+	
 };

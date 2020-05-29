@@ -6,8 +6,7 @@ typedef cv::Point3_<uint8_t> Pixel;
 
 class PicPool {
 public:
-	PicPool(const char* dataset_rela_dir) {
-		DATASET_RELA_DIR = dataset_rela_dir;
+	PicPool(std::string& dataset_rela_dir) : DATASET_RELA_DIR(dataset_rela_dir){
 	}
 	
 	/*
@@ -32,9 +31,10 @@ public:
 				break;
 			}
 			// load image
-			tmpData->image = cv::imread(DATASET_RELA_DIR + tmpData->fileName);
+			std::string fileDir = DATASET_RELA_DIR + tmpData->fileName;
+			tmpData->image = cv::imread(fileDir);
 			if (tmpData->image.empty()) {
-				std::cerr << "Fail to load image from " << DATASET_RELA_DIR + tmpData->fileName << std::endl;
+				std::cerr << "Fail to load image from " << fileDir << std::endl;
 				fin.close();
 				return -2;
 			}
@@ -100,5 +100,5 @@ private:
 		}
 	}
 	std::vector<PicInfo*> pool;
-	const char *DATASET_RELA_DIR;
+	std::string DATASET_RELA_DIR;
 };
