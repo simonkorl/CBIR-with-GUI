@@ -11,42 +11,22 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>QtWidgetsApplication1</string>
+   <string>CBIR demo</string>
   </property>
   <widget class="QWidget" name="centralWidget">
-   <widget class="QTextBrowser" name="textBrowser_5">
-    <property name="geometry">
-     <rect>
-      <x>30</x>
-      <y>750</y>
-      <width>1081</width>
-      <height>81</height>
-     </rect>
-    </property>
-    <property name="placeholderText">
-     <string/>
-    </property>
-   </widget>
    <widget class="QWidget" name="gridLayoutWidget_2">
     <property name="geometry">
      <rect>
       <x>30</x>
       <y>10</y>
-      <width>921</width>
-      <height>151</height>
+      <width>1071</width>
+      <height>181</height>
      </rect>
     </property>
     <layout class="QGridLayout" name="gridLayout_2">
      <property name="sizeConstraint">
-      <enum>QLayout::SetFixedSize</enum>
+      <enum>QLayout::SetDefaultConstraint</enum>
      </property>
-     <item row="1" column="0">
-      <widget class="QLabel" name="label_2">
-       <property name="text">
-        <string>图片信息文件</string>
-       </property>
-      </widget>
-     </item>
      <item row="0" column="0">
       <widget class="QLabel" name="label">
        <property name="text">
@@ -54,10 +34,10 @@
        </property>
       </widget>
      </item>
-     <item row="2" column="0">
-      <widget class="QLabel" name="label_3">
+     <item row="3" column="1">
+      <widget class="QPushButton" name="doverallButton">
        <property name="text">
-        <string>检索结果输出目录</string>
+        <string>选择文件夹</string>
        </property>
       </widget>
      </item>
@@ -68,8 +48,15 @@
        </property>
       </widget>
      </item>
-     <item row="2" column="2">
-      <widget class="QTextBrowser" name="resultBrowser">
+     <item row="1" column="0">
+      <widget class="QLabel" name="label_2">
+       <property name="text">
+        <string>图片信息文件</string>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="2">
+      <widget class="QTextBrowser" name="dataSetBrowser">
        <property name="sizePolicy">
         <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
          <horstretch>0</horstretch>
@@ -84,8 +71,45 @@
        </property>
       </widget>
      </item>
-     <item row="0" column="2">
-      <widget class="QTextBrowser" name="dataSetBrowser">
+     <item row="1" column="1">
+      <widget class="QPushButton" name="fimageButton">
+       <property name="text">
+        <string>选择文件</string>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="1">
+      <widget class="QPushButton" name="ddataButton">
+       <property name="text">
+        <string>选择文件夹</string>
+       </property>
+      </widget>
+     </item>
+     <item row="2" column="0">
+      <widget class="QLabel" name="label_3">
+       <property name="text">
+        <string>检索结果输出目录</string>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="2">
+      <widget class="QTextBrowser" name="infoBrowser">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>800</width>
+         <height>32</height>
+        </size>
+       </property>
+      </widget>
+     </item>
+     <item row="2" column="2">
+      <widget class="QTextBrowser" name="resultBrowser">
        <property name="sizePolicy">
         <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
          <horstretch>0</horstretch>
@@ -119,22 +143,6 @@
        </property>
       </widget>
      </item>
-     <item row="1" column="2">
-      <widget class="QTextBrowser" name="infoBrowser">
-       <property name="sizePolicy">
-        <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
-         <horstretch>0</horstretch>
-         <verstretch>0</verstretch>
-        </sizepolicy>
-       </property>
-       <property name="maximumSize">
-        <size>
-         <width>800</width>
-         <height>32</height>
-        </size>
-       </property>
-      </widget>
-     </item>
      <item row="2" column="1">
       <widget class="QPushButton" name="dresultButton">
        <property name="text">
@@ -142,24 +150,56 @@
        </property>
       </widget>
      </item>
-     <item row="1" column="1">
-      <widget class="QPushButton" name="fimageButton">
+     <item row="0" column="3" rowspan="2">
+      <widget class="QPushButton" name="loadButton">
+       <property name="enabled">
+        <bool>false</bool>
+       </property>
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="toolTip">
+        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;需要指定“图片数据集”和“图片信息文件”的路径才能加载数据&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+       </property>
+       <property name="whatsThis">
+        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;需要指定“图片数据集”和“图片信息文件”的路径才能加载数据&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+       </property>
        <property name="text">
-        <string>选择文件</string>
+        <string>加载数据</string>
+       </property>
+       <property name="checkable">
+        <bool>false</bool>
+       </property>
+       <property name="autoRepeat">
+        <bool>false</bool>
+       </property>
+       <property name="autoDefault">
+        <bool>false</bool>
+       </property>
+       <property name="flat">
+        <bool>false</bool>
        </property>
       </widget>
      </item>
-     <item row="0" column="1">
-      <widget class="QPushButton" name="ddataButton">
-       <property name="text">
-        <string>选择文件夹</string>
+     <item row="2" column="3" rowspan="2">
+      <widget class="QPushButton" name="exportButton">
+       <property name="enabled">
+        <bool>false</bool>
        </property>
-      </widget>
-     </item>
-     <item row="3" column="1">
-      <widget class="QPushButton" name="doverallButton">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="toolTip">
+        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;需要指定“检索结果输出目录”和“检索总体结果输出目录”的路径才能导出结果&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+       </property>
        <property name="text">
-        <string>选择文件夹</string>
+        <string>导出结果</string>
        </property>
       </widget>
      </item>
@@ -169,7 +209,7 @@
     <property name="geometry">
      <rect>
       <x>30</x>
-      <y>180</y>
+      <y>210</y>
       <width>431</width>
       <height>61</height>
      </rect>
@@ -215,7 +255,7 @@
     <property name="geometry">
      <rect>
       <x>680</x>
-      <y>190</y>
+      <y>220</y>
       <width>411</width>
       <height>51</height>
      </rect>
@@ -281,66 +321,13 @@
      </item>
     </layout>
    </widget>
-   <widget class="QPushButton" name="loadButton">
-    <property name="enabled">
-     <bool>false</bool>
-    </property>
-    <property name="geometry">
-     <rect>
-      <x>1000</x>
-      <y>30</y>
-      <width>111</width>
-      <height>51</height>
-     </rect>
-    </property>
-    <property name="toolTip">
-     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;需要指定“图片数据集”和“图片信息文件”的路径才能加载数据&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-    </property>
-    <property name="whatsThis">
-     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;需要指定“图片数据集”和“图片信息文件”的路径才能加载数据&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-    </property>
-    <property name="text">
-     <string>加载数据</string>
-    </property>
-    <property name="checkable">
-     <bool>false</bool>
-    </property>
-    <property name="autoRepeat">
-     <bool>false</bool>
-    </property>
-    <property name="autoDefault">
-     <bool>false</bool>
-    </property>
-    <property name="flat">
-     <bool>false</bool>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="exportButton">
-    <property name="enabled">
-     <bool>false</bool>
-    </property>
-    <property name="geometry">
-     <rect>
-      <x>1000</x>
-      <y>100</y>
-      <width>111</width>
-      <height>51</height>
-     </rect>
-    </property>
-    <property name="toolTip">
-     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;需要指定“检索结果输出目录”和“检索总体结果输出目录”的路径才能导出结果&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-    </property>
-    <property name="text">
-     <string>导出结果</string>
-    </property>
-   </widget>
    <widget class="QTableView" name="tableView">
     <property name="geometry">
      <rect>
-      <x>30</x>
-      <y>310</y>
-      <width>461</width>
-      <height>401</height>
+      <x>20</x>
+      <y>390</y>
+      <width>321</width>
+      <height>411</height>
      </rect>
     </property>
     <property name="sortingEnabled">
@@ -354,7 +341,7 @@
     <property name="geometry">
      <rect>
       <x>490</x>
-      <y>190</y>
+      <y>220</y>
       <width>151</width>
       <height>41</height>
      </rect>
@@ -369,8 +356,8 @@
     </property>
     <property name="geometry">
      <rect>
-      <x>30</x>
-      <y>260</y>
+      <x>20</x>
+      <y>310</y>
       <width>101</width>
       <height>41</height>
      </rect>
@@ -382,8 +369,8 @@
    <widget class="QLineEdit" name="lineEdit">
     <property name="geometry">
      <rect>
-      <x>150</x>
-      <y>260</y>
+      <x>140</x>
+      <y>310</y>
       <width>201</width>
       <height>41</height>
      </rect>
@@ -395,8 +382,8 @@
     </property>
     <property name="geometry">
      <rect>
-      <x>380</x>
-      <y>260</y>
+      <x>360</x>
+      <y>310</y>
       <width>111</width>
       <height>41</height>
      </rect>
@@ -404,6 +391,46 @@
     <property name="text">
      <string>由文件导入</string>
     </property>
+   </widget>
+   <widget class="QWidget" name="gridLayoutWidget">
+    <property name="geometry">
+     <rect>
+      <x>370</x>
+      <y>390</y>
+      <width>741</width>
+      <height>411</height>
+     </rect>
+    </property>
+    <layout class="QGridLayout" name="gridLayout_3">
+     <item row="1" column="1">
+      <widget class="QLabel" name="label_res2">
+       <property name="text">
+        <string/>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="1">
+      <widget class="QLabel" name="label_query">
+       <property name="text">
+        <string/>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="2">
+      <widget class="QLabel" name="label_res3">
+       <property name="text">
+        <string/>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="0">
+      <widget class="QLabel" name="label_res1">
+       <property name="text">
+        <string/>
+       </property>
+      </widget>
+     </item>
+    </layout>
    </widget>
   </widget>
   <widget class="QToolBar" name="mainToolBar">

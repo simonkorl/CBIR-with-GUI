@@ -29,6 +29,7 @@ public slots:
     void insertQuery();
     void searchAll();
     void exportResult();
+    void onTableClicked(const QModelIndex& index);
 private:
     Ui::QtWidgetsApplication1Class ui;
     QString dataSetDir;
@@ -38,4 +39,10 @@ private:
     QString overallDir;
     PicRetriever* retriever = NULL;
     QStandardItemModel* model;
+    QImage queryImage;
+    QImage resImage[3];
+    std::ofstream fout;
+    std::streambuf* stream_buffer_cout;
+    std::streambuf* stream_buffer_cerr;
+    std::streambuf* stream_buffer_file;
 };

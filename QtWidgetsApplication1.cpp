@@ -1,5 +1,5 @@
 #include "QtWidgetsApplication1.h"
-
+#include <opencv2/imgproc/types_c.h>
 QtWidgetsApplication1::QtWidgetsApplication1(QWidget *parent)
     : QMainWindow(parent)
 {
@@ -16,11 +16,24 @@ QtWidgetsApplication1::QtWidgetsApplication1(QWidget *parent)
 	connect(ui.searchButton, SIGNAL(clicked()), this, SLOT(searchAll()));
 	connect(ui.exportButton, SIGNAL(clicked()), this, SLOT(exportResult()));
 
+	connect(ui.tableView, SIGNAL(clicked(const QModelIndex&)), this, SLOT(onTableClicked(const QModelIndex&)));
+
 	model = new QStandardItemModel();
 	model->setColumnCount(2);
 	model->setHeaderData(0, Qt::Horizontal, QString::fromLocal8Bit("图片路径"));
 	model->setHeaderData(1, Qt::Horizontal, QString::fromLocal8Bit("检索准确率"));
 	ui.tableView->setModel(model);
+
+	fout.open("CBIR.log", std::ofstream::app);
+	if (!fout.is_open()) {
+		QMessageBox::information(this, "Log error", "Fail to open log file");
+	}
+
+	stream_buffer_cout = std::cout.rdbuf();
+	stream_buffer_cerr = std::cerr.rdbuf();
+	stream_buffer_file = fout.rdbuf();
+	std::cout.rdbuf(stream_buffer_file);
+	std::cerr.rdbuf(stream_buffer_file);
 }
 
 void QtWidgetsApplication1::getDataSetDir() {
@@ -57,6 +70,9 @@ QtWidgetsApplication1::~QtWidgetsApplication1(){
 	}
 	if (model)
 		delete model;
+	std::cout.rdbuf(stream_buffer_cout);
+	std::cerr.rdbuf(stream_buffer_cerr);
+	fout.close();
 }
 
 void QtWidgetsApplication1::getPicInfoDir()
@@ -136,6 +152,7 @@ void QtWidgetsApplication1::loadImageInfo(){
 		qDebug() << "Cannot load image infos because either directory is empty";
 	}
 	else {
+		ui.loadButton->setEnabled(false);
 		if (retriever->loadPicPool(picInfoDir.toStdString()) > 0) {
 			QMessageBox::information(this, "Load finished", "Images loading finished!", QMessageBox::Ok);
 			ui.queryButton->setEnabled(true);
@@ -148,6 +165,7 @@ void QtWidgetsApplication1::loadImageInfo(){
 			ui.queryFileButton->setEnabled(false);
 			ui.searchButton->setEnabled(false);
 		}
+		ui.loadButton->setEnabled(true);
 	}
 }
 
@@ -185,7 +203,9 @@ void QtWidgetsApplication1::insertQuery(){
 			retriever->queries.push_back(n_query);
 
 			model->setItem(retriever->queries.size() - 1, 0, new QStandardItem(n_fileName));
-			model->setItem(retriever->queries.size() - 1, 1, new QStandardItem(0));
+			model->setItem(retriever->queries.size() - 1, 1, new QStandardItem("0"));
+
+			ui.lineEdit->clear();
 		}
 		else {
 			QMessageBox::warning(this, "Filename error", "The filename is invalid.", QMessageBox::Ok);
@@ -239,5 +259,33 @@ void QtWidgetsApplication1::exportResult(){
 	}
 	else {
 		QMessageBox::information(this, "Export succeeds", "Exportation is finished.", QMessageBox::Ok);
+	}
+}
+
+void QtWidgetsApplication1::onTableClicked(const QModelIndex& index){
+	if (index.isValid() && retriever->m_pool.isLoaded() && retriever->queries.size() > 0) {
+		if (index.row() < retriever->queries.size()) {
+			cv::Mat temp;
+			cv::cvtColor((retriever->queries)[index.row()]->picInfo->image, temp, CV_BGR2RGB);
+			queryImage = QImage((const unsigned char*)(temp.data), temp.cols, temp.rows, temp.step, QImage::Format_RGB888);
+			ui.label_query->setPixmap(QPixmap::fromImage(queryImage));
+			ui.label_query->show();
+
+			for (int i = 0; i < 3 && i < (retriever->queries)[index.row()]->results.size(); ++i) {
+				cv::cvtColor((retriever->queries)[index.row()]->results[i].first->image, temp, CV_BGR2RGB);
+				resImage[i] = QImage((const unsigned char*)(temp.data), temp.cols, temp.rows, temp.step, QImage::Format_RGB888);
+				switch (i)
+				{
+				case 0:
+					ui.label_res1->setPixmap(QPixmap::fromImage(resImage[i]));
+				case 1:
+					ui.label_res2->setPixmap(QPixmap::fromImage(resImage[i]));
+				case 2:
+					ui.label_res3->setPixmap(QPixmap::fromImage(resImage[i]));
+				default:
+					break;
+				}
+			}
+		}
 	}
 }
