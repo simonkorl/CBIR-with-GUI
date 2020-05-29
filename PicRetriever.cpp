@@ -135,7 +135,7 @@ int PicRetriever::dumpQuery(Query* query, std::string dirName)
 		return -1;
 	}
 
-	for (int i = 0; i < 30; ++i) {
+	for (int i = 0; i < query->results.size(); ++i) {
 		fout << query->results[i].first->fileName << " " << query->results[i].second << endl;
 		//cout << query->results[i].first->fileName << " " << query->results[i].second << endl; //debug
 	}

@@ -3,6 +3,9 @@
 #include <QtWidgets/QMainWindow>
 #include <QFileDialog>
 #include <QDebug>
+#include <QMessageBox>
+#include <QStandardItemModel>
+#include <QLineEdit>
 #include <fstream>
 #include <iostream>
 
@@ -23,11 +26,16 @@ public slots:
     void getOverallDir();
     void loadImageInfo();
     void loadQueries();
+    void insertQuery();
+    void searchAll();
+    void exportResult();
 private:
     Ui::QtWidgetsApplication1Class ui;
     QString dataSetDir;
     QString picInfoDir;
+    QString queryDir;
     QString resultDir;
     QString overallDir;
     PicRetriever* retriever = NULL;
+    QStandardItemModel* model;
 };

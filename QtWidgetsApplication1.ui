@@ -17,10 +17,10 @@
    <widget class="QTextBrowser" name="textBrowser_5">
     <property name="geometry">
      <rect>
-      <x>20</x>
-      <y>720</y>
-      <width>1091</width>
-      <height>91</height>
+      <x>30</x>
+      <y>750</y>
+      <width>1081</width>
+      <height>81</height>
      </rect>
     </property>
     <property name="placeholderText">
@@ -31,8 +31,8 @@
     <property name="geometry">
      <rect>
       <x>30</x>
-      <y>20</y>
-      <width>951</width>
+      <y>10</y>
+      <width>921</width>
       <height>151</height>
      </rect>
     </property>
@@ -191,7 +191,7 @@
      <item>
       <layout class="QHBoxLayout" name="horizontalLayout">
        <item>
-        <widget class="QRadioButton" name="radioButton_6">
+        <widget class="QRadioButton" name="bin16Button">
          <property name="text">
           <string>16</string>
          </property>
@@ -201,7 +201,7 @@
         </widget>
        </item>
        <item>
-        <widget class="QRadioButton" name="radioButton_7">
+        <widget class="QRadioButton" name="bin128Button">
          <property name="text">
           <string>128</string>
          </property>
@@ -237,21 +237,21 @@
      <item>
       <layout class="QGridLayout" name="gridLayout">
        <item row="0" column="4">
-        <widget class="QRadioButton" name="radioButton_5">
+        <widget class="QRadioButton" name="JMradioButton">
          <property name="text">
           <string>JM</string>
          </property>
         </widget>
        </item>
        <item row="0" column="2">
-        <widget class="QRadioButton" name="radioButton_3">
+        <widget class="QRadioButton" name="BhradioButton">
          <property name="text">
           <string>Bh</string>
          </property>
         </widget>
        </item>
        <item row="0" column="0">
-        <widget class="QRadioButton" name="radioButton">
+        <widget class="QRadioButton" name="L2radioButton">
          <property name="text">
           <string>L2</string>
          </property>
@@ -264,14 +264,14 @@
         </widget>
        </item>
        <item row="0" column="1">
-        <widget class="QRadioButton" name="radioButton_2">
+        <widget class="QRadioButton" name="HIradioButton">
          <property name="text">
           <string>HI</string>
          </property>
         </widget>
        </item>
        <item row="0" column="3">
-        <widget class="QRadioButton" name="radioButton_4">
+        <widget class="QRadioButton" name="cosradioButton">
          <property name="text">
           <string>cos</string>
          </property>
@@ -282,6 +282,9 @@
     </layout>
    </widget>
    <widget class="QPushButton" name="loadButton">
+    <property name="enabled">
+     <bool>false</bool>
+    </property>
     <property name="geometry">
      <rect>
       <x>1000</x>
@@ -289,6 +292,12 @@
       <width>111</width>
       <height>51</height>
      </rect>
+    </property>
+    <property name="toolTip">
+     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;需要指定“图片数据集”和“图片信息文件”的路径才能加载数据&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+    </property>
+    <property name="whatsThis">
+     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;需要指定“图片数据集”和“图片信息文件”的路径才能加载数据&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
     </property>
     <property name="text">
      <string>加载数据</string>
@@ -307,6 +316,9 @@
     </property>
    </widget>
    <widget class="QPushButton" name="exportButton">
+    <property name="enabled">
+     <bool>false</bool>
+    </property>
     <property name="geometry">
      <rect>
       <x>1000</x>
@@ -314,6 +326,9 @@
       <width>111</width>
       <height>51</height>
      </rect>
+    </property>
+    <property name="toolTip">
+     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;需要指定“检索结果输出目录”和“检索总体结果输出目录”的路径才能导出结果&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
     </property>
     <property name="text">
      <string>导出结果</string>
@@ -323,28 +338,73 @@
     <property name="geometry">
      <rect>
       <x>30</x>
+      <y>310</y>
+      <width>461</width>
+      <height>401</height>
+     </rect>
+    </property>
+    <property name="sortingEnabled">
+     <bool>false</bool>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="searchButton">
+    <property name="enabled">
+     <bool>false</bool>
+    </property>
+    <property name="geometry">
+     <rect>
+      <x>490</x>
+      <y>190</y>
+      <width>151</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>检索</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="queryButton">
+    <property name="enabled">
+     <bool>false</bool>
+    </property>
+    <property name="geometry">
+     <rect>
+      <x>30</x>
       <y>260</y>
-      <width>321</width>
-      <height>441</height>
+      <width>101</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>输入检索路径</string>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="lineEdit">
+    <property name="geometry">
+     <rect>
+      <x>150</x>
+      <y>260</y>
+      <width>201</width>
+      <height>41</height>
      </rect>
     </property>
    </widget>
-  </widget>
-  <widget class="QMenuBar" name="menuBar">
-   <property name="geometry">
-    <rect>
-     <x>0</x>
-     <y>0</y>
-     <width>1128</width>
-     <height>26</height>
-    </rect>
-   </property>
-   <widget class="QMenu" name="menu">
-    <property name="title">
-     <string>文件</string>
+   <widget class="QPushButton" name="queryFileButton">
+    <property name="enabled">
+     <bool>false</bool>
+    </property>
+    <property name="geometry">
+     <rect>
+      <x>380</x>
+      <y>260</y>
+      <width>111</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>由文件导入</string>
     </property>
    </widget>
-   <addaction name="menu"/>
   </widget>
   <widget class="QToolBar" name="mainToolBar">
    <attribute name="toolBarArea">
