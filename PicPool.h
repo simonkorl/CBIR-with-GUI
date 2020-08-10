@@ -22,6 +22,11 @@ public:
 		}
 		PicInfo* tmpData = NULL;
 		std::cout << "Loading images from " << allImages << "..." << std::endl;
+		
+		if (!pool.empty()) {
+			clearPool();
+		}
+		
 		while (!fin.eof()) {
 			// read lines
 			tmpData = new PicInfo();
@@ -72,13 +77,16 @@ public:
 	}
 
 	~PicPool(){
+		clearPool();
+	}
+private:
+	void clearPool() {
 		// release image info resource
 		while (pool.size() > 0) {
 			delete pool.back();
 			pool.pop_back();
 		}
 	}
-private:
 	void calcImgHists(PicInfo* info) {
 		/// This is slow but it works
 		// TODO: Try to find a faster way to do the same thing
